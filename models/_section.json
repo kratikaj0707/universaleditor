@@ -50,7 +50,11 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "carousel",
+        "accordian",
+        "articles",
+        "teaser"
       ]
     }
   ]

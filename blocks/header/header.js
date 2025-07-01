@@ -71,37 +71,84 @@ function toggleAllNavSections(sections, expanded = false) {
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
-  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
+
+  // Mobile only
+  if (!isDesktop.matches) {
+    const sidebarId = 'mobile-sidebar';
+    const existingSidebar = document.getElementById(sidebarId);
+
+    if (!expanded) {
+      // === OPEN SIDEBAR ===
+
+      // Create sidebar container
+      const sidebar = document.createElement('div');
+      sidebar.id = sidebarId;
+      
+      sidebar.style.overflowY = 'auto';
+      sidebar.style.zIndex = '1000';
+      sidebar.style.transition = 'transform 0.3s ease';
+      // sidebar.style.transform = 'translateX(0%)';
+
+      // Clone navSections into sidebar
+      const navClone = navSections.cloneNode(true);
+
+// Find the ul inside the cloned structure
+const ul = navClone.querySelector('.default-content-wrapper ul');
+
+if (ul) {
+  // Create a new <li><a>Home</a></li> element
+  const homeLi = document.createElement('li');
+  const homeLink = document.createElement('a');
+  homeLink.href = '/'; // or your home route
+  homeLink.textContent = 'Home';
+
+  homeLi.appendChild(homeLink);
+
+  // Insert as first child of <ul>
+  ul.insertBefore(homeLi, ul.firstChild);
+}
+
+// Add the updated clone to the sidebar
+sidebar.appendChild(navClone);
+document.body.appendChild(sidebar);
+
+
+      // Force reflow and slide in
+      requestAnimationFrame(() => {
+        sidebar.style.transform = 'translateX(0)';
+        document.body.style.transition = 'transform 0.5s ease';
+        document.body.style.transform = 'translateX(0%)';
+      });
+
+    } else {
+      // === CLOSE SIDEBAR ===
+      if (existingSidebar) {
+        existingSidebar.style.transform = 'translateX(-100%)';
+        document.body.style.transform = 'translateX(0)';
+
+        setTimeout(() => {
+          if (existingSidebar.parentNode) {
+            existingSidebar.parentNode.removeChild(existingSidebar);
+          }
+        }, 300); // match transition duration
+      }
+    }
+  }
+
+  // Toggle aria and accessibility
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
-    navDrops.forEach((drop) => {
-      if (!drop.hasAttribute('tabindex')) {
-        drop.setAttribute('tabindex', 0);
-        drop.addEventListener('focus', focusNavSection);
-      }
-    });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
-  }
 
-  // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
     nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
+
 
 /**
  * loads and decorates the header, mainly the nav
@@ -112,7 +159,17 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
-
+ 
+  const navTop=document.createElement("div");
+  navTop.id="nav-top";
+  navTop.innerHTML="<span>SIGN IN</span><span>EN-US</span>";
+  window.addEventListener('scroll', function () {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }})
   // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
@@ -124,6 +181,42 @@ export default async function decorate(block) {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
   });
+  const navTools = nav.querySelector('.nav-tools');
+
+if (navTools) {
+  const searchIconSpan = navTools.querySelector('.icon-search');
+console.log(searchIconSpan);
+  if (searchIconSpan) {
+    // Create a wrapper
+    const searchWrapper = document.createElement('div');
+    searchWrapper.className = 'nav-search-wrapper';
+
+    // Move the existing icon into wrapper
+    searchWrapper.appendChild(searchIconSpan.cloneNode(true));
+
+    // Create the search input
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'SEARCH';
+    searchInput.className = 'nav-search-input';
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim();
+        if (query) {
+          const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+          window.open(googleUrl, '_blank'); 
+          searchInput.value = '';
+          
+        }
+      }
+    });
+    // Add input to wrapper
+    searchWrapper.appendChild(searchInput);
+
+    // Replace the icon with the new wrapper
+    searchIconSpan.replaceWith(searchWrapper);
+  }
+}
 
   const navBrand = nav.querySelector('.nav-brand');
   const brandLink = navBrand.querySelector('.button');
@@ -135,11 +228,15 @@ export default async function decorate(block) {
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
+        
         if (isDesktop.matches) {
           const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          
           toggleAllNavSections(navSections);
+          
           navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
       });
@@ -150,7 +247,7 @@ export default async function decorate(block) {
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
+      <span class="nav-hamburger-icon"><span></span></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
@@ -161,6 +258,7 @@ export default async function decorate(block) {
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  navWrapper.append(navTop);
   navWrapper.append(nav);
   block.append(navWrapper);
 }
