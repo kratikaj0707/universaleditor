@@ -1,0 +1,69 @@
+.section .teaser-wrapper{
+    padding: 14px;
+}
+.section .teaser-wrapper .teaser > div{
+
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+background-color: #e8e9eb;
+}
+.section .teaser-wrapper .teaser > div >div {
+    line-height: 0;
+    
+}
+.section .teaser-wrapper .teaser > div >div:nth-of-type(2){
+    padding: 63px 36px 36px 36px;;
+    line-height: 1.5;
+}
+.section .teaser-wrapper .teaser > div >div:nth-of-type(2) >p > strong{
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 2.5;
+    margin: 0 0 13.5px;
+    text-align: justify;
+
+}
+.section .teaser-wrapper .teaser > div >div:nth-of-type(2) >h2{
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin:.5em 0;
+
+}
+.section .teaser-wrapper .teaser > div >div:nth-of-type(2) >p{
+    font-size: 14px;
+    line-height: 1.75;
+}
+.section .teaser-wrapper .teaser > div >div:nth-of-type(2) >p >strong > a {
+    border-radius: 0;
+    background-color: #ffea00;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 35px;
+    margin: 0;
+}
+@media (width>=900px) {
+    .section .teaser-wrapper{
+        /* margin: 0 50px; */
+        padding: 0;
+    }
+    .section .teaser-wrapper .teaser{
+        padding: 0 14px;
+    }
+    .section .teaser-wrapper .teaser > div{
+
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-between; */
+    background-color: #e8e9eb;
+    }
+    .section .teaser-wrapper .teaser > div >div >picture > img{
+        height: 100%;
+        /* max-width: 160%; */
+    }
+    .section .teaser-wrapper .teaser > div >div:nth-of-type(2){
+        max-width: 30%;
+    }
+}
