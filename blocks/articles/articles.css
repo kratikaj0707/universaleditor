@@ -1,0 +1,63 @@
+.articles-wrapper > div{
+  padding: 0 14px;
+}
+
+.articles-wrapper .articles > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
+  /* grid-gap: 24px; */
+  
+}
+
+.articles > ul > li {
+  background-color: white;
+  /* border: 1px solid #dadada;
+  background-color: var(--background-color); */
+  margin-right: 72px;
+  margin-bottom: 32px;
+
+}
+
+.articles .cards-card-body {
+  /* margin: 16px; */
+}
+
+.articles >ul >li>a .cards-card-image {
+  line-height: 0;
+}
+
+.articles > ul > li >a img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.articles > ul >li> a .cards-card-body> :where(h2,h3,h4){
+  color: #202020;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: var(--body-font-family);
+  margin-top: 4%;
+  line-height: 1;
+  font-weight: 600;
+  color: #202020;
+}
+
+.articles > ul >li> a .cards-card-body> p{
+  font-size: 14px;
+  text-transform: uppercase;
+  color: dimgray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.8;
+}
+
+@media(width>=900px){
+  .articles > ul > li {
+    margin-right: 15px;
+  }
+}

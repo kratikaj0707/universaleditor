@@ -180,12 +180,204 @@
     ]
   },
   {
+    "id": "footer",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Logo",
+        "name": "logo",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link - Magazine",
+        "name": "ctaMagazine",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text - Magazine",
+        "name": "ctaTextMagazine",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link - Adventures",
+        "name": "ctaAdventures",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text - Adventures",
+        "name": "ctaTextAdventures",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link - FAQs",
+        "name": "ctaFAQs",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text - FAQs",
+        "name": "ctaTextFAQs",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link - About Us",
+        "name": "ctaAboutUs",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text - About Us",
+        "name": "ctaTextAboutUs",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Social Icon - Facebook",
+        "name": "socialFacebook",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Social Icon - Twitter",
+        "name": "socialTwitter",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Social Icon - Instagram",
+        "name": "socialInstagram",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Copyright Text",
+        "name": "copyright",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Footer Description",
+        "name": "footerDescription",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Image Source Note",
+        "name": "imageSource",
+        "value": "",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "header",
+    "fields": [
+      {
+        "component": "aem-content",
+        "label": "Cta Home Link",
+        "name": "ctaHome",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Home Text",
+        "name": "ctaHomeText",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link",
+        "name": "cta",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text",
+        "name": "ctaText",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link",
+        "name": "cta",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text",
+        "name": "ctaText",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link",
+        "name": "cta",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text",
+        "name": "ctaText",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "Cta Link",
+        "name": "cta",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Cta Text",
+        "name": "ctaText",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Search",
+        "name": "search",
+        "value": "",
+        "valueType": "string"
       }
     ]
   },
